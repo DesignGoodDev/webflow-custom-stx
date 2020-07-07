@@ -1,7 +1,8 @@
 <script>
   ready( function() {
     addMonthClasses();
-    removeExtraHeadings();
+    showOnlyFirstMonthHeadings();
+    // removeExtraDropdownItems();
   });
 
   function ready( callback ) {
@@ -12,7 +13,7 @@
     });
   }
 
-  // give all .month elements an additional class of their month's name
+  // 1. give all .month elements an additional class of their month's name
   function addMonthClasses() {
     const monthsCollection = document.querySelectorAll('.month');
     for(let i=0; i < monthsCollection.length; i++) {
@@ -21,51 +22,52 @@
     }
   }
 
-  function removeExtraDropdownItems() {
-    // use array.prototype.map() ?
-    // to rebuild ul containing only li's of months
-    // for whom there is at least one tournament in that month
-  }
+  // 2. if month has duplicate headings, only show the first heading
+  function showOnlyFirstMonthHeadings() {
 
-  function removeExtraHeadings() {
-    const upcomingSection = document.getElementById('upcoming-section');
+    // 1. get all the els with class 'month'
+    const tournaments = document.getElementById('upcoming-section');
+    const monthHeadings = tournaments.querySelectorAll('.month');
 
-    const januaryHeadings = upcomingSection.querySelectorAll('.january.month');
-    if(januaryHeadings.length > 0) {
-      januaryHeadings[0].style.display = "block";
+    // 2. use filter to get an array that has no duplicates, based on the els' classLists
+    let monthHeadingArray = Array.from(monthHeadings);
+
+    // let testArray = [
+    //   {
+    //     month: 'august',
+    //     id: 1
+    //   },
+    //   {
+    //     month: 'august',
+    //     id: 2
+    //   },
+    //   {
+    //     month: 'november',
+    //     id: 3
+    //   }
+    // ];
+
+    function uniqueByClassList(array) {
+      return array.filter( (v, i, a) => a.findIndex(t => (t.classList.value === v.classList.value) ) === i );
     }
 
-    const februaryHeadings = upcomingSection.querySelectorAll('.february.month');
-    if(februaryHeadings.length > 0) {
-      februaryHeadings[0].style.display = "block";
+    const months = uniqueByClassList(monthHeadingArray);
+
+    //console.log(uniqueByClassList(monthHeadingArray));
+
+    // 3. loop over this new array and do all the petty stuff to each item
+
+    for(let i=0; i < months.length; i++) {
+      let monthHeading = months[i];
+      let monthAnchor = document.createElement('span');
+      let monthText = monthHeading.innerHTML.toLowerCase();
+      monthAnchor.id = monthText;
+      monthAnchor.classList.add('anchor');
+      monthHeading.insertAdjacentElement('afterbegin', monthAnchor);
+      monthHeading.style.display = 'block';
     }
 
-    const marchHeadings = upcomingSection.querySelectorAll('.march.month');
-    if(marchHeadings.length > 0) {
-      marchHeadings[0].style.display = "block";
-    }
-
-    const aprilHeadings = upcomingSection.querySelectorAll('.april.month');
-    if(aprilHeadings.length > 0) {
-      aprilHeadings[0].style.display = "block";
-    }
-
-    const mayHeadings = upcomingSection.querySelectorAll('.may.month');
-    if(mayHeadings.length > 0) {
-      mayHeadings[0].style.display = "block";
-    }
-
-    const juneHeadings = upcomingSection.querySelectorAll('.june.month');
-    if(juneHeadings.length > 0) {
-      juneHeadings[0].style.display = "block";
-    }
-
-    const julyHeadings = upcomingSection.querySelectorAll('.july.month');
-    if(julyHeadings.length > 0) {
-      julyHeadings[0].style.display = "block";
-    }
-
-    const augustHeadings = upcomingSection.querySelectorAll('.august.month');
+    /*const augustHeadings = tournaments.querySelectorAll('.august.month');
     if(augustHeadings.length > 0) {
       let augustAnchor = document.createElement('span');
       let augustText = augustHeadings[0].innerHTML.toLowerCase();
@@ -75,25 +77,95 @@
       augustHeadings[0].style.display = "block";
     }
 
-    const septemberHeadings = upcomingSection.querySelectorAll('.september.month');
+    const januaryHeadings = tournaments.querySelectorAll('.january.month');
+    if(januaryHeadings.length > 0) {
+      januaryHeadings[0].style.display = "block";
+    }
+
+    const februaryHeadings = tournaments.querySelectorAll('.february.month');
+    if(februaryHeadings.length > 0) {
+      februaryHeadings[0].style.display = "block";
+    }
+
+    const marchHeadings = tournaments.querySelectorAll('.march.month');
+    if(marchHeadings.length > 0) {
+      marchHeadings[0].style.display = "block";
+    }
+
+    const aprilHeadings = tournaments.querySelectorAll('.april.month');
+    if(aprilHeadings.length > 0) {
+      aprilHeadings[0].style.display = "block";
+    }
+
+    const mayHeadings = tournaments.querySelectorAll('.may.month');
+    if(mayHeadings.length > 0) {
+      mayHeadings[0].style.display = "block";
+    }
+
+    const juneHeadings = tournaments.querySelectorAll('.june.month');
+    if(juneHeadings.length > 0) {
+      juneHeadings[0].style.display = "block";
+    }
+
+    const julyHeadings = tournaments.querySelectorAll('.july.month');
+    if(julyHeadings.length > 0) {
+      julyHeadings[0].style.display = "block";
+    }
+
+
+    const septemberHeadings = tournaments.querySelectorAll('.september.month');
     if(septemberHeadings.length > 0) {
       septemberHeadings[0].style.display = "block";
     }
 
-    const octoberHeadings = upcomingSection.querySelectorAll('.october.month');
+    const octoberHeadings = tournaments.querySelectorAll('.october.month');
     if(octoberHeadings.length > 0) {
       octoberHeadings[0].style.display = "block";
     }
 
-    const novemberHeadings = upcomingSection.querySelectorAll('.november.month');
+    const novemberHeadings = tournaments.querySelectorAll('.november.month');
     if(novemberHeadings.length > 0) {
       novemberHeadings[0].style.display = "block";
     }
 
-    const decemberHeadings = upcomingSection.querySelectorAll('.december.month');
+    const decemberHeadings = tournaments.querySelectorAll('.december.month');
     if(decemberHeadings.length > 0) {
       decemberHeadings[0].style.display = "block";
     }
+    */
+  }
 
+  // 3. remove unnecessary months from dropdown
+  function removeExtraDropdownItems() {
+    // use map or filter ?
+    // to rebuild ul containing only li's of months
+    // for whom there is at least one tournament in that month
+
+    const tournaments = document.getElementById('upcoming-section');
+    const monthsNodeList = tournaments.querySelectorAll('.month') ;
+    const months = Array.from(monthsNodeList);
+
+    //const currentMonth = [];
+    // prev version of reduce function didn't work because it checked the sameness of our elements, and they are all unique
+    // need to update to check the sameness of their classList instead (or something simple like that)
+
+    const monthsWithTournaments = [];
+    months.reduce( function(monthsWithTournaments, currentMonth, currentIndex, months ) {
+      // this needs to be fixed so that each currentMonth is an array of elements that each have that month's className
+      if( currentMonth.length > 1 ) {
+        return monthsWithTournaments.push( currentMonth );
+      }
+    });
+
+    // goal Array ?
+    let goal = [
+      [
+        'h3.august',
+        'h3.august'
+      ],
+      [
+        'h3.november'
+      ]
+    ];
   }
 </script>
