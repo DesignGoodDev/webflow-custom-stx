@@ -5,6 +5,7 @@
     extendCurrentToParents();
     applyImageOverlays();
     removeInvisibleElements();
+    handleSideNavState();
   });
 
   function ready( callback ) {
@@ -94,13 +95,38 @@
 
     closeArea.classList.add('close-area');
     siteWrap[0].insertBefore(closeArea, header);
-    closeArea.addEventListener('click', removeCloseArea, false);
+    closeArea.addEventListener('click', removeCloseArea);
   }
 
   function handleSubNavState() {
     const allSubNavToggles = document.querySelectorAll('.sub-nav__parent');
     for (let i=0 ; i < allSubNavToggles.length; i++) {
-      allSubNavToggles[i].addEventListener('click', toggleSubNav, false);
+      allSubNavToggles[i].addEventListener('click', toggleSubNav);
+    }
+  }
+
+  function handleSideNavLink( event ) {
+    event.preventDefault();
+    toggleSideNav();
+  }
+
+  function toggleSideNav( event ) {
+    let sideNav = document.getElementById('side-nav');
+    let sideNavDropdown = sideNav.querySelectorAll('.side-nav__list')[0];
+    sideNavDropdown.classList.toggle('open');
+  }
+
+  function handleSideNavState() {
+    let sideNav = document.getElementById('side-nav');
+    let sideNavToggle = sideNav.querySelectorAll('.side-nav__heading');
+    let sideNavLinks = sideNav.querySelectorAll('li a');
+    //sideNavToggle.addEventListener('click', toggleSideNav);
+    for (let i=0; i < sideNavToggle.length; i++) {
+      console.log(sideNavToggle[i]);
+      sideNavToggle[i].addEventListener('click', toggleSideNav);
+    }
+    for (let i=0; i < sideNavLinks.length; i++) {
+      sideNavLinks[i].addEventListener('click', handleSideNavLink);
     }
   }
 
@@ -110,7 +136,7 @@
 
   function handleMobileNavState() {
     const hamburger = document.getElementById('hamburger');
-    hamburger.addEventListener('click', toggleMobileMenu, false);
+    hamburger.addEventListener('click', toggleMobileMenu);
   }
 
   function wrapElements(element, wrapper) {
@@ -139,17 +165,6 @@
     const allWebflowHiddenEls = document.querySelectorAll('.w-condition-invisible');
     for (let i=0 ; i < allWebflowHiddenEls.length; i++) {
       allWebflowHiddenEls[i].remove();
-    }
-  }
-
-  function toggleSideNav( event ) {
-
-  }
-
-  function handleSideNavState() {
-    const allSubNavToggles = document.querySelectorAll('.sub-nav__parent');
-    for (let i=0 ; i < allSubNavToggles.length; i++) {
-      allSubNavToggles[i].addEventListener('click', toggleSideNav, false);
     }
   }
 </script>
