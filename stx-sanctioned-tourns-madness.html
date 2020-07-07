@@ -1,0 +1,190 @@
+<script>
+
+  ready( function() {
+    addMonthClasses();
+    removeExtraHeadings();
+  });
+
+  function ready( callback ) {
+    if (document.readyState != 'loading') callback();
+    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+    else document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') callback();
+    });
+  }
+
+  // give all .month elements an additional class of their month's name
+  function addMonthClasses() {
+    const monthsCollection = document.querySelectorAll('.month');
+    for(let i=0; i < monthsCollection.length; i++) {
+      let monthText = monthsCollection[i].innerHTML.toLowerCase();
+      monthsCollection[i].classList.add(monthText);
+    }
+  }
+
+  function removeExtraHeadings() {
+    const upcomingSection = document.getElementById('upcoming-section');
+    const pastSection = document.getElementById('past-section');
+
+    const januaryHeadings = upcomingSection.querySelectorAll('.january.month');
+    if(januaryHeadings.length > 0) {
+      januaryHeadings[0].style.display = "block";
+    }
+
+    const februaryHeadings = upcomingSection.querySelectorAll('.february.month');
+    if(februaryHeadings.length > 0) {
+      februaryHeadings[0].style.display = "block";
+    }
+
+    const marchHeadings = upcomingSection.querySelectorAll('.march.month');
+    if(marchHeadings.length > 0) {
+      marchHeadings[0].style.display = "block";
+    }
+
+    const aprilHeadings = upcomingSection.querySelectorAll('.april.month');
+    if(aprilHeadings.length > 0) {
+      aprilHeadings[0].style.display = "block";
+    }
+
+    const mayHeadings = upcomingSection.querySelectorAll('.may.month');
+    if(mayHeadings.length > 0) {
+      mayHeadings[0].style.display = "block";
+    }
+
+    const juneHeadings = upcomingSection.querySelectorAll('.june.month');
+    if(juneHeadings.length > 0) {
+      juneHeadings[0].style.display = "block";
+    }
+
+    const julyHeadings = upcomingSection.querySelectorAll('.july.month');
+    if(julyHeadings.length > 0) {
+      julyHeadings[0].style.display = "block";
+    }
+
+    const augustHeadings = upcomingSection.querySelectorAll('.august.month');
+    if(augustHeadings.length > 0) {
+      augustHeadings[0].style.display = "block";
+    }
+
+    const septemberHeadings = upcomingSection.querySelectorAll('.september.month');
+    if(septemberHeadings.length > 0) {
+      septemberHeadings[0].style.display = "block";
+    }
+
+    const octoberHeadings = upcomingSection.querySelectorAll('.october.month');
+    if(octoberHeadings.length > 0) {
+      octoberHeadings[0].style.display = "block";
+    }
+
+    const novemberHeadings = upcomingSection.querySelectorAll('.november.month');
+    if(novemberHeadings.length > 0) {
+      novemberHeadings[0].style.display = "block";
+    }
+
+    const decemberHeadings = upcomingSection.querySelectorAll('.december.month');
+    if(decemberHeadings.length > 0) {
+      decemberHeadings[0].style.display = "block";
+    }
+
+
+    const januaryHeadingsPast = pastSection.querySelectorAll('.january.month');
+    if(januaryHeadingsPast.length > 0) {
+      januaryHeadingsPast[0].style.display = "block";
+    }
+
+    const februaryHeadingsPast = pastSection.querySelectorAll('.february.month');
+    if(februaryHeadingsPast.length > 0) {
+      februaryHeadingsPast[0].style.display = "block";
+    }
+
+    const marchHeadingsPast = pastSection.querySelectorAll('.march.month');
+    if(marchHeadingsPast.length > 0) {
+      marchHeadingsPast[0].style.display = "block";
+    }
+
+    const aprilHeadingsPast = pastSection.querySelectorAll('.april.month');
+    if(aprilHeadingsPast.length > 0) {
+      aprilHeadingsPast[0].style.display = "block";
+    }
+
+    const mayHeadingsPast = pastSection.querySelectorAll('.may.month');
+    if(mayHeadingsPast.length > 0) {
+      mayHeadingsPast[0].style.display = "block";
+    }
+
+    const juneHeadingsPast = pastSection.querySelectorAll('.june.month');
+    if(juneHeadingsPast.length > 0) {
+      juneHeadingsPast[0].style.display = "block";
+    }
+
+    const julyHeadingsPast = pastSection.querySelectorAll('.july.month');
+    if(julyHeadingsPast.length > 0) {
+      julyHeadingsPast[0].style.display = "block";
+    }
+
+    const augustHeadingsPast = pastSection.querySelectorAll('.august.month');
+    if(augustHeadingsPast.length > 0) {
+      augustHeadingsPast[0].style.display = "block";
+    }
+
+    const septemberHeadingsPast = pastSection.querySelectorAll('.september.month');
+    if(septemberHeadingsPast.length > 0) {
+      septemberHeadingsPast[0].style.display = "block";
+    }
+
+    const octoberHeadingsPast = pastSection.querySelectorAll('.october.month');
+    if(octoberHeadingsPast.length > 0) {
+      octoberHeadingsPast[0].style.display = "block";
+    }
+
+    const novemberHeadingsPast = pastSection.querySelectorAll('.november.month');
+    if(novemberHeadingsPast.length > 0) {
+      novemberHeadingsPast[0].style.display = "block";
+    }
+
+    const decemberHeadingsPast = pastSection.querySelectorAll('.december.month');
+    if(decemberHeadingsPast.length > 0) {
+      decemberHeadingsPast[0].style.display = "block";
+    }
+  }
+
+
+  //let monthsArray = ['august', 'august', 'october', 'october', 'october', 'november'];
+
+  // grab all the months, reduce to groupings that share month name
+  // then for groupings with length greater than 1, remove all but first item
+
+  //for( const i of upcomingMonths ) {
+    //console.log(i.innerHTML);
+  //}
+
+  // convert to Array so we can use reduce
+  //let monthsArray = Array.from(upcomingMonths);
+  //console.log(monthsArray);
+
+  //let duplicatesArray = monthsArray.reduce( function( acc, cur, idx, src) {
+  	// if the position of this exact item within the orig array
+    // is different than the current index (ie there's more than one of it)
+    // AND if the position of this item within the new array we're making
+    // is less than 0 (ie it's not already present)
+    // add it to the new array
+  	//if (src.indexOf(cur) !== idx && acc.indexOf(cur) < 0) {
+    	//acc.push(cur);
+    //}
+    //return acc;
+
+    // let's try with find() instead
+    // if the first el in the orig array that has an innerHTML value
+    // THAT IS equal to the currentValue's innerHTML
+    // AND if the position of this item within the new array we're making
+    // is less than 0 (ie it's not already present)
+    // add it to the new array
+    //if ( src.find( el => el.innerHTML === cur.innerHTML) !== idx && acc.indexOf(cur) < 0) {
+    	//acc.push(cur.innerHTML);
+      //console.log(cur.innerHTML);
+    //}
+    //return acc;
+  //}, []);
+
+  //console.log(duplicatesArray);
+</script>
