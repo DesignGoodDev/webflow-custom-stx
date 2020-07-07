@@ -1,5 +1,4 @@
 <script>
-
   ready( function() {
     addMonthClasses();
     removeExtraHeadings();
@@ -22,9 +21,15 @@
     }
   }
 
+  function removeExtraDropdownItems() {
+    // use array.prototype.map() ?
+    // to rebuild ul containing only li's of months
+    // for whom there is at least one tournament in that month
+  }
+
   function removeExtraHeadings() {
     const upcomingSection = document.getElementById('upcoming-section');
-    const pastSection = document.getElementById('past-section');
+    /*const pastSection = document.getElementById('past-section');*/
 
     const januaryHeadings = upcomingSection.querySelectorAll('.january.month');
     if(januaryHeadings.length > 0) {
@@ -63,6 +68,11 @@
 
     const augustHeadings = upcomingSection.querySelectorAll('.august.month');
     if(augustHeadings.length > 0) {
+      let augustAnchor = document.createElement('span');
+      let augustText = augustHeadings[0].innerHTML.toLowerCase();
+      augustAnchor.id = augustText;
+      augustAnchor.classList.add('anchor');
+      augustHeadings[0].insertAdjacentElement('afterbegin', augustAnchor);
       augustHeadings[0].style.display = "block";
     }
 
@@ -87,7 +97,7 @@
     }
 
 
-    const januaryHeadingsPast = pastSection.querySelectorAll('.january.month');
+    /*const januaryHeadingsPast = pastSection.querySelectorAll('.january.month');
     if(januaryHeadingsPast.length > 0) {
       januaryHeadingsPast[0].style.display = "block";
     }
@@ -145,46 +155,6 @@
     const decemberHeadingsPast = pastSection.querySelectorAll('.december.month');
     if(decemberHeadingsPast.length > 0) {
       decemberHeadingsPast[0].style.display = "block";
-    }
+    }*/
   }
-
-
-  //let monthsArray = ['august', 'august', 'october', 'october', 'october', 'november'];
-
-  // grab all the months, reduce to groupings that share month name
-  // then for groupings with length greater than 1, remove all but first item
-
-  //for( const i of upcomingMonths ) {
-    //console.log(i.innerHTML);
-  //}
-
-  // convert to Array so we can use reduce
-  //let monthsArray = Array.from(upcomingMonths);
-  //console.log(monthsArray);
-
-  //let duplicatesArray = monthsArray.reduce( function( acc, cur, idx, src) {
-  	// if the position of this exact item within the orig array
-    // is different than the current index (ie there's more than one of it)
-    // AND if the position of this item within the new array we're making
-    // is less than 0 (ie it's not already present)
-    // add it to the new array
-  	//if (src.indexOf(cur) !== idx && acc.indexOf(cur) < 0) {
-    	//acc.push(cur);
-    //}
-    //return acc;
-
-    // let's try with find() instead
-    // if the first el in the orig array that has an innerHTML value
-    // THAT IS equal to the currentValue's innerHTML
-    // AND if the position of this item within the new array we're making
-    // is less than 0 (ie it's not already present)
-    // add it to the new array
-    //if ( src.find( el => el.innerHTML === cur.innerHTML) !== idx && acc.indexOf(cur) < 0) {
-    	//acc.push(cur.innerHTML);
-      //console.log(cur.innerHTML);
-    //}
-    //return acc;
-  //}, []);
-
-  //console.log(duplicatesArray);
 </script>
