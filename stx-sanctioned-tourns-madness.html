@@ -2,7 +2,7 @@
   ready( function() {
     addMonthClasses();
     showOnlyFirstMonthHeadings();
-    // removeExtraDropdownItems();
+    removeExtraDropdownItems();
   });
 
   function ready( callback ) {
@@ -25,38 +25,17 @@
   // 2. if month has duplicate headings, only show the first heading
   function showOnlyFirstMonthHeadings() {
 
-    // 1. get all the els with class 'month'
-    const tournaments = document.getElementById('upcoming-section');
-    const monthHeadings = tournaments.querySelectorAll('.month');
+    // a. get all the elements with class 'month'
+    const monthsNodeList = document.querySelectorAll('#tournaments .month');
 
-    // 2. use filter to get an array that has no duplicates, based on the els' classLists
-    let monthHeadingArray = Array.from(monthHeadings);
-
-    // let testArray = [
-    //   {
-    //     month: 'august',
-    //     id: 1
-    //   },
-    //   {
-    //     month: 'august',
-    //     id: 2
-    //   },
-    //   {
-    //     month: 'november',
-    //     id: 3
-    //   }
-    // ];
-
+    // b. use filter to get an array that has no duplicates, based on the els' classLists
     function uniqueByClassList(array) {
       return array.filter( (v, i, a) => a.findIndex(t => (t.classList.value === v.classList.value) ) === i );
     }
-
+    const monthHeadingArray = Array.from(monthsNodeList);
     const months = uniqueByClassList(monthHeadingArray);
 
-    //console.log(uniqueByClassList(monthHeadingArray));
-
-    // 3. loop over this new array and do all the petty stuff to each item
-
+    // c. loop over this new array and do all the petty stuff to each item
     for(let i=0; i < months.length; i++) {
       let monthHeading = months[i];
       let monthAnchor = document.createElement('span');
@@ -66,106 +45,37 @@
       monthHeading.insertAdjacentElement('afterbegin', monthAnchor);
       monthHeading.style.display = 'block';
     }
-
-    /*const augustHeadings = tournaments.querySelectorAll('.august.month');
-    if(augustHeadings.length > 0) {
-      let augustAnchor = document.createElement('span');
-      let augustText = augustHeadings[0].innerHTML.toLowerCase();
-      augustAnchor.id = augustText;
-      augustAnchor.classList.add('anchor');
-      augustHeadings[0].insertAdjacentElement('afterbegin', augustAnchor);
-      augustHeadings[0].style.display = "block";
-    }
-
-    const januaryHeadings = tournaments.querySelectorAll('.january.month');
-    if(januaryHeadings.length > 0) {
-      januaryHeadings[0].style.display = "block";
-    }
-
-    const februaryHeadings = tournaments.querySelectorAll('.february.month');
-    if(februaryHeadings.length > 0) {
-      februaryHeadings[0].style.display = "block";
-    }
-
-    const marchHeadings = tournaments.querySelectorAll('.march.month');
-    if(marchHeadings.length > 0) {
-      marchHeadings[0].style.display = "block";
-    }
-
-    const aprilHeadings = tournaments.querySelectorAll('.april.month');
-    if(aprilHeadings.length > 0) {
-      aprilHeadings[0].style.display = "block";
-    }
-
-    const mayHeadings = tournaments.querySelectorAll('.may.month');
-    if(mayHeadings.length > 0) {
-      mayHeadings[0].style.display = "block";
-    }
-
-    const juneHeadings = tournaments.querySelectorAll('.june.month');
-    if(juneHeadings.length > 0) {
-      juneHeadings[0].style.display = "block";
-    }
-
-    const julyHeadings = tournaments.querySelectorAll('.july.month');
-    if(julyHeadings.length > 0) {
-      julyHeadings[0].style.display = "block";
-    }
-
-
-    const septemberHeadings = tournaments.querySelectorAll('.september.month');
-    if(septemberHeadings.length > 0) {
-      septemberHeadings[0].style.display = "block";
-    }
-
-    const octoberHeadings = tournaments.querySelectorAll('.october.month');
-    if(octoberHeadings.length > 0) {
-      octoberHeadings[0].style.display = "block";
-    }
-
-    const novemberHeadings = tournaments.querySelectorAll('.november.month');
-    if(novemberHeadings.length > 0) {
-      novemberHeadings[0].style.display = "block";
-    }
-
-    const decemberHeadings = tournaments.querySelectorAll('.december.month');
-    if(decemberHeadings.length > 0) {
-      decemberHeadings[0].style.display = "block";
-    }
-    */
   }
 
   // 3. remove unnecessary months from dropdown
   function removeExtraDropdownItems() {
-    // use map or filter ?
-    // to rebuild ul containing only li's of months
+    // Game plan:
+    // use filter to rebuild ul containing only li's of months
     // for whom there is at least one tournament in that month
 
-    const tournaments = document.getElementById('upcoming-section');
-    const monthsNodeList = tournaments.querySelectorAll('.month') ;
-    const months = Array.from(monthsNodeList);
+    // a. build array of relevant months, ie those that have anchors
+    //    (this assumes that the previous function showOnlyFirstMonthHeadings did it's job)
+    const monthAnchors = Array.from( document.querySelectorAll('#tournaments .month .anchor') );
 
-    //const currentMonth = [];
-    // prev version of reduce function didn't work because it checked the sameness of our elements, and they are all unique
-    // need to update to check the sameness of their classList instead (or something simple like that)
+    // b. build array of the original dropdown list items
+    const dropdownItems = Array.from( document.querySelectorAll('#side-nav li') );
 
-    const monthsWithTournaments = [];
-    months.reduce( function(monthsWithTournaments, currentMonth, currentIndex, months ) {
-      // this needs to be fixed so that each currentMonth is an array of elements that each have that month's className
-      if( currentMonth.length > 1 ) {
-        return monthsWithTournaments.push( currentMonth );
-      }
+    // c. make a new array that contains only the li's that we want to keep;
+    //    do this by filtering the dropdown items by their link's innerHTML (ie the month name),
+    //    and comparing that against the list of anchors on the page, by their id (ie the month name)
+    const filteredDropdownItems = dropdownItems.filter( function( item ) {
+      return monthAnchors.some( function( anchor ) {
+        return anchor.id === item.childNodes[0].innerHTML.toLowerCase();
+      });
     });
 
-    // goal Array ?
-    let goal = [
-      [
-        'h3.august',
-        'h3.august'
-      ],
-      [
-        'h3.november'
-      ]
-    ];
+    // d. empty the original list
+    const dropdownNodeList = document.querySelectorAll('#side-nav ul')[0];
+    dropdownNodeList.innerHTML = '';
+
+    // e. add each item from the new filtered array of relevant list items
+    for (let i = 0; i < filteredDropdownItems.length; i++) {
+      dropdownNodeList.appendChild(filteredDropdownItems[i]);
+    }
   }
 </script>
