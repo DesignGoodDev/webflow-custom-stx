@@ -1,0 +1,23 @@
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+const enableSwiper = function() {
+  mySwiper = new Swiper ('.swiper-container.swiper--photos', {
+  	speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next.photos-next',
+      prevEl: '.swiper-button-prev.photos-prev',
+    },
+    pagination: {
+      el: '.photos-pagination.swiper-pagination',
+      type: 'bullets',
+      clickable: true,
+    },
+    slidesPerView: 'auto',
+    a11y: true,
+    keyboardControl: true,
+    grabCursor: true,
+  });
+};
+enableSwiper();
+</script>

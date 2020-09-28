@@ -1,0 +1,176 @@
+<style>
+::selection {
+    background-color: #4AC7E0;
+    color: #fff;
+}
+.button {
+  position: relative;
+  z-index: 1;
+}
+.button::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg,rgba(214,209,202,0.43),#EA0029);
+  z-index: -1;
+  transition: opacity 200ms ease;
+  opacity: 0;
+}
+.button:hover::before {
+  opacity: 1;
+}
+.button-group {
+  margin-left: -10px;
+}
+.button-group .button {
+  margin: 10px;
+}
+a[href=""],
+a[href="#"] {
+  color: #D6D1CA;
+}
+.button[href="#"],
+.button[href=""],
+.button[href="#"]:hover,
+.button[href=""]:hover{
+  background-color: #D6D1CA;
+  color: #002A3A;
+}
+.button[href="#"]:hover::before,
+.button[href=""]:hover::before{
+  display: none;
+}
+li a,
+p a {
+  text-transform: none;
+}
+/* small post-heading hr settings */
+.w-richtext h1::after,
+.w-richtext h2::after,
+.w-richtext h3::after,
+.w-richtext h4::after,
+[class*='hr-after']::after {
+  content: '';
+  display: block;
+  margin-top: 10px;
+  width: 80%;
+  max-width: 160px;
+  height: 7px;
+}
+/* aqua */
+.w-richtext h2::after,
+.w-richtext h3::after,
+.hr-after--aqua::after {
+  background-color: #4AC7E0;
+}
+/* red */
+.w-richtext h1::after,
+.w-richtext h4::after,
+.hr-after--red::after {
+  background-color: #EA0029;
+}
+/* navy */
+.hr-after--navy::after {
+  background-color: #002A3A;
+}
+.w-richtext h1::after,
+h1[class*='hr-after']::after {
+  max-width: 172px;
+}
+.w-richtext h2::after,
+h2[class*='hr-after']::after {
+  max-width: 160px;
+}
+.w-richtext h3::after,
+h3[class*='hr-after']::after {
+  max-width: 136px;
+}
+.w-richtext h4::after,
+h4[class*='hr-after']::after {
+  max-width: 130px;
+}
+
+.hero h4::after {
+  content: '';
+  display: block;
+  margin-top: 10px;
+  width: 80%;
+  max-width: 160px;
+  height: 7px;
+  background-color: #EA0029;
+}
+@media (max-width: 767px) {
+.hero h4 {
+  max-width: 280px;
+}
+.hero h4::after {display: none}
+.hero h1 {
+  max-width: 280px;
+}
+.hero h1::after {
+  content: '';
+  display: block;
+  margin-top: 10px;
+  width: 80%;
+  max-width: 160px;
+  height: 7px;
+  background-color: #EA0029;
+}
+}
+.no-hrs h1::after,
+.no-hrs h2::after,
+.no-hrs h3::after,
+.no-hrs h4::after {
+  display: none;
+}
+.h4--no-hr h4::after {
+  display: none;
+}
+ul {
+  list-style: none;
+}
+ul li::before {
+  content: '–';
+  color: #4AC7E0;
+  position: absolute;
+  margin-left: -20px;
+}
+ol {
+  margin-bottom: 20px;
+}
+.w-richtext ol li::marker,
+ol li::marker {
+  color: #4AC7E0;
+  font-weight: bold;
+}
+.w-richtext ul li,
+.w-richtext ol li {
+  margin-bottom: 10px;
+}
+.bold-caps a {
+  text-transform: uppercase;
+}
+.mb-0 {margin-bottom: 0}
+@media (max-width: 991px) {
+  h1.odp-heading {
+    padding-right: 90px;
+    min-height: 111px;
+    position: relative;
+  }
+  h1.odp-heading::before {
+    content: '';
+    background-image: url('https://uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5ef0f766143306fdbbdc338a_Texas---South_PMS_ODP.png');
+    background-size: 78px 111px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 78px;
+    height: 111px;
+  }
+}
+</style>

@@ -1,0 +1,54 @@
+<style>
+.side-nav__heading {
+  font-family: Open Sans, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: #002a3a !important;
+  margin: 0;
+  line-height: 1;
+}
+.side-nav__heading::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='8px' height='5px' viewBox='0 0 8 5' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3Eicon-toggle%3C/title%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Homepage-Main-Nav' transform='translate(-301.000000, -53.000000)' fill='%234AC7E0' fill-rule='nonzero'%3E%3Cg id='Group' transform='translate(253.000000, 45.000000)'%3E%3Cpolygon id='icon-toggle' points='48.3431462 8.08125 51.1056462 12.90625 52.3181462 12.90625 55.1056462 8.08125 53.7806462 8.08125 51.7181462 11.60625 49.6556462 8.08125'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 8px;
+}
+.open.side-nav__list {
+  display: block;
+}
+.side-nav li {
+  line-height: 1.25;
+  padding: 10px;
+  border-bottom: 3px solid #D6D1CA;
+}
+.side-nav li::before {
+  display: none;
+}
+.side-nav li:last-child {
+  border-bottom: 0;
+}
+.side-nav li a {
+  color: #002A3A;
+  text-decoration: none;
+  transition: color 200ms ease;
+  width: 100%;
+  display: inline-block;
+}
+.side-nav li:hover a {
+  color: #4AC7E0;
+}
+[id].section::before {
+  content: '';
+  display: block;
+  margin-top: -180px;
+  height: 180px;
+}
+</style>

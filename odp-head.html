@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<style>
+.slideshow::after {
+	content: '';
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background: linear-gradient(90deg, rgba(0,84,108,0.26) 0%, #002A3A 100%);
+  z-index: 1;
+}
+.swiper-wrapper {
+	width: 85%;
+}
+.swiper-wrapper img {
+  width: 98%;
+}
+.swiper-slide a,
+.swiper-slide div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swiper-button-prev {
+	left: 20px;
+}
+.swiper-button-next {
+	right: 20px;
+}
+.swiper-button-prev:after {
+	content: url('https://uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5eecfeb82a1f3733ad8529af_arrows-prev.svg');
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+.swiper-button-next:after {
+	content: url('https://uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5eecfeb8ad8dd59f4680ed4e_arrows-next.svg');
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+.swiper-pagination {
+	width: 100%;
+}
+.swiper-pagination-bullet {
+	border-radius: 0;
+  background-color: #002A3A;
+  opacity: 1;
+  width: 11px;
+  height: 11px;
+  margin: 0 2px;
+}
+.swiper-pagination-bullet-active {
+	background-color: #4AC7E0;
+}
+@media (min-width: 767px) {
+	.swiper-button-prev {
+  	left: 40px;
+  }
+  .swiper-button-next {
+  	right: 40px;
+  }
+}
+</style>

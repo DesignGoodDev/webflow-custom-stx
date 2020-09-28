@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<style>
+.swiper-button-prev,
+.swiper-button-next {
+	color: #fff;
+  top: calc(50% + 30px);
+}
+.swiper-button-prev:after {
+	content: url('https://uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5eecfeb82a1f3733ad8529af_arrows-prev.svg');
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+.swiper-button-next:after {
+	content: url('https://uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5eecfeb8ad8dd59f4680ed4e_arrows-next.svg');
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+.swiper-button-prev {
+	display: none;
+}
+.swiper-button-next {
+	right: 10%;
+}
+@media (max-width: 639px) {
+	.container--right.container--swiper {
+  	padding-right: 0;
+    margin-right: 0;
+  }
+  .swiper-wrapper {
+  	width: 85%;
+  }
+  .sponsor__item.swiper-slide {
+  	height: 200px;
+  }
+  .sponsor__item.swiper-slide a,
+  .sponsor__item.swiper-slide div {
+  	display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sponsor__item.swiper-slide .logo--square {
+  	max-width: 200px;
+    width: 60%;
+  }
+  .sponsor__item.swiper-slide .logo--medium {
+  	max-width: 200px;
+    width: 70%;
+  }
+  .sponsor__item.swiper-slide .logo--wide {
+  	max-width: 200px;
+    width: 80%;
+  }
+
+}
+@media (min-width: 640px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+}
+</style>
