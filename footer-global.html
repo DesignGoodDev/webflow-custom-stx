@@ -7,6 +7,7 @@
     removeInvisibleElements();
     handleSideNavState();
     addScrollToTopButton();
+    classifyParents();
   });
 
   function ready( callback ) {
@@ -21,7 +22,14 @@
     scrollFunction();
   };
 
+  window.onresize = function() {
+    handleSubNavState();
+  }
+
   const header = document.getElementById('nav');
+  const parentLinks = document.querySelectorAll('.sub-nav__parent');
+  const navBreakpoint = window.matchMedia( '(min-width: 1140px)' );
+
   function scrollFunction() {
     setTimeout( function() {
       if (window.pageYOffset > 550) {
@@ -58,15 +66,15 @@
   }
 
   function toggleSubNav( event ) {
-    const allSubNavToggles = document.querySelectorAll('.sub-nav__parent');
+    // const parentLinks = document.querySelectorAll('.sub-nav__parent');
     const closeArea = document.querySelectorAll('.close-area');
     let thisSubNav = event.target.nextElementSibling;
 
-    for (let i=0; i < allSubNavToggles.length; i++) {
+    for (let i=0; i < parentLinks.length; i++) {
       //if a sub nav is open but is not the sub nav closest to the clicked toggle, close the sub nav
-      if (allSubNavToggles[i].nextElementSibling.classList.contains('open') && allSubNavToggles[i].nextElementSibling !== thisSubNav) {
-        allSubNavToggles[i].nextElementSibling.classList.toggle('open');
-        allSubNavToggles[i].classList.toggle('active');
+      if (parentLinks[i].nextElementSibling.classList.contains('open') && parentLinks[i].nextElementSibling !== thisSubNav) {
+        parentLinks[i].nextElementSibling.classList.toggle('open');
+        parentLinks[i].classList.toggle('active');
         // go ahead and remove all close areas
         for (let i=0; i < closeArea.length; i++) {
           closeArea[i].remove();
@@ -74,9 +82,9 @@
         // dont return yet, allow the rest of the function to proceed
       }
       //if a sub nav is open and it IS the sub nav closest to the clicked toggle, close the sub nav
-       else if (allSubNavToggles[i].nextElementSibling.classList.contains('open') && allSubNavToggles[i].nextElementSibling == thisSubNav) {
-        allSubNavToggles[i].nextElementSibling.classList.remove('open');
-        allSubNavToggles[i].classList.remove('active');
+       else if (parentLinks[i].nextElementSibling.classList.contains('open') && parentLinks[i].nextElementSibling == thisSubNav) {
+        parentLinks[i].nextElementSibling.classList.remove('open');
+        parentLinks[i].classList.remove('active');
         // go ahead and remove all close areas
         for (let i=0; i < closeArea.length; i++) {
           closeArea[i].remove();
@@ -100,11 +108,27 @@
   }
 
   function handleSubNavState() {
-    const allSubNavToggles = document.querySelectorAll('.sub-nav__parent');
-    for (let i=0 ; i < allSubNavToggles.length; i++) {
-      allSubNavToggles[i].addEventListener('click', toggleSubNav);
+    if ( navBreakpoint.matches === false ) {
+      // smaller than navBreakpoint
+      for (let i=0 ; i < parentLinks.length; i++) {
+        parentLinks[i].addEventListener('click', toggleSubNav);
+      }
+    }
+    else if ( navBreakpoint.matches === true) {
+      // larger than navBreakpoint
+      for (let i=0 ; i < parentLinks.length; i++) {
+        parentLinks[i].removeEventListener('click', toggleSubNav);
+      }
     }
   }
+
+  function classifyParents() {
+    const allSubNavs = header.querySelectorAll( '.nav-item [role="list"]');
+    for (const subNav of allSubNavs) {
+      subNav.closest( '.nav-item' ).classList.add( 'parent' );
+    }
+  }
+
 
   function handleSideNavLink( event ) {
     event.preventDefault();
@@ -123,10 +147,9 @@
       return;
     }
     let sideNavToggle = sideNav.querySelectorAll('.side-nav__heading');
-    let sideNavLinks = sideNav.querySelectorAll('li a');
-    //sideNavToggle.addEventListener('click', toggleSideNav);
+    let sideNavLinks = sideNav.querySelectorAll('li a, .w-dyn-item a');
     for (let i=0; i < sideNavToggle.length; i++) {
-      console.log(sideNavToggle[i]);
+      // console.log(sideNavToggle[i]);
       sideNavToggle[i].addEventListener('click', toggleSideNav);
     }
     for (let i=0; i < sideNavLinks.length; i++) {
@@ -174,24 +197,35 @@
 
   function addScrollToTopButton() {
     const img = document.createElement('img');
+    const text = document.createElement('span');
+    const btn = document.createElement('div');
 
-    img.src = '//uploads-ssl.webflow.com/5eb043b98cf9c48746832cbb/5ef4d46efa65b49bd9402e0c_back-to-top-outlined.svg';
+    // build img
+    img.src = '//uploads-ssl.webflow.com/5eb41e3d0505e2474e28450a/5ed95d3cc76b3bbc6b116f5e_arrows-up.svg';
 
-    const btn = document.createElement('a');
+    // build and style text
+    text.innerText = 'Back to top';
+    text.setAttribute('style', 'text-transform:uppercase;text-decoration:underline;font-weight:bold;color:#EA0029;line-height:1.25;padding-top:10px;');
 
-    if ( ! document.body.id == 'top' ) {
-      document.body.id = 'top';
-    }
-
-    btn.href = '#top';
-    btn.setAttribute('style', 'position:fixed;bottom:10px;right:10px;visibility:hidden;opacity:0;transition:all 250ms ease;');
-
-    btn.append(img);
-
+    // position button in corner, hidden for now
+    btn.setAttribute('style', 'position:fixed;bottom:10px;right:10px;visibility:hidden;opacity:0;transition:all 250ms ease;cursor:pointer;width:51px;display:flex;flex-direction:column;');
+    // add img and text inside button
+    btn.append(img, text);
+    // add button to bottom of Body
     document.body.appendChild(btn);
 
-    window.addEventListener('scroll', scrollFunctionButton);
+    // scroll up on click
+    btn.addEventListener('click', scrollMeUp);
+    function scrollMeUp() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
 
+    // show button when scroll past 1000px from top
+    window.addEventListener('scroll', scrollFunctionButton);
     function scrollFunctionButton() {
       setTimeout( function() {
         if ( window.pageYOffset > 1000 ) {
