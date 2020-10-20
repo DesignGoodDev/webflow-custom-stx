@@ -1,0 +1,27 @@
+<script>
+  ready( function() {
+    rearrangeCompetitions();
+  });
+
+  function ready( callback ) {
+    if (document.readyState != 'loading') callback();
+    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+    else document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') callback();
+    });
+  }
+
+  function rearrangeCompetitions() {
+    const now = new Date();
+    const month = now.getMonth();
+
+    // if current month is greater than 4 (zero-indexed), ie June 1 or after
+    if ( month >= 4 ) {
+      const fallSection = document.getElementById( 'fall' );
+      const springSection = document.getElementById( 'spring' );
+      const parentSection = fallSection.parentNode;
+
+      parentSection.insertBefore( fallSection, springSection );
+    }
+  }
+</script>
