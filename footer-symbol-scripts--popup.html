@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+<script>
+  ready( function() {
+    handleModals();
+    setModalCookie();
+  });
+
+  function ready( callback ) {
+    if (document.readyState != 'loading') callback();
+    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+    else document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') callback();
+    });
+  }
+
+  function handleModals() {
+    const modals = document.querySelectorAll( '.modal' );
+    if ( ! modals ) {
+      return;
+    }
+    for ( const modal of modals ) {
+      let button = modal.querySelectorAll( '.modal__close' )[0];
+      button.addEventListener( 'click', function() {
+        modal.classList.remove( 'opened' );
+      });
+    }
+  }
+
+  function setModalCookie() {
+    if ( Cookies.get( 'stx-alert-{{wf {&quot;path&quot;:&quot;slug&quot;,&quot;type&quot;:&quot;PlainText&quot;\} }}' ) === undefined ) {
+      // delay of 7 seconds
+      setTimeout( function() {
+         document.querySelectorAll( '.modal' )[0].classList.add('opened');
+        //let modal = document.getElementById( 'modal' )[0];
+        //modal.classList.add( 'opened' );
+        // cookie expires in 7 days
+        Cookies.set( 'stx-alert-{{wf {&quot;path&quot;:&quot;slug&quot;,&quot;type&quot;:&quot;PlainText&quot;\} }}', true, { expires: 7 } );
+      }, 7000);
+    }
+  }
+</script>
